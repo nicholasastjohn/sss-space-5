@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SSS Space 5 is a weekly public-space-company watchlist built from transparent metrics and public evidence.">
+  <meta property="og:title" content="SSS Space 5">
+  <meta property="og:description" content="A weekly top-five public space-company watchlist based on transparent metrics.">
+  <meta property="og:type" content="website">
+  <title>SSS Space 5</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f4f1e9;
+      --muted: #a9b0b8;
+      --page: #070a0f;
+      --panel: #0e131b;
+      --panel-2: #151c25;
+      --line: #29313c;
+      --signal: #ef7b45;
+      --cool: #77d8e4;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 78% 6%, rgba(119, 216, 228, 0.11), transparent 28rem),
+        radial-gradient(circle at 15% 38%, rgba(239, 123, 69, 0.08), transparent 24rem),
+        var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--cool);
+      outline-offset: 4px;
+    }
+
+    .wrap {
+      width: min(calc(100% - 2rem), var(--max));
+      margin-inline: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(41, 49, 60, 0.72);
+      background: rgba(7, 10, 15, 0.88);
+      backdrop-filter: blur(16px);
+    }
+
+    nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--signal);
+      font: 700 0.75rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .hero {
+      min-height: 76vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 6rem);
+      padding: clamp(5rem, 10vw, 9rem) 0;
+    }
+
+    .eyebrow,
+    .label {
+      color: var(--cool);
+      font: 700 0.72rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 1rem 0 1.25rem;
+      font-size: clamp(3.3rem, 9vw, 7.8rem);
+      line-height: 0.88;
+      letter-spacing: -0.07em;
+    }
+
+    .hero-copy {
+      max-width: 690px;
+      color: #c8cdd2;
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.05rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      text-decoration: none;
+      font-weight: 750;
+    }
+
+    .button.primary {
+      border-color: var(--signal);
+      background: var(--signal);
+      color: #15100d;
+    }
+
+    .status-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: linear-gradient(145deg, rgba(21, 28, 37, 0.95), rgba(10, 14, 20, 0.98));
+      padding: clamp(1.4rem, 4vw, 2.2rem);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    .status-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, var(--signal), var(--cool));
+    }
+
+    .status-card h2 {
+      margin: 0.8rem 0 0.3rem;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .status-card p { color: var(--muted); }
+
+    .status-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 0;
+    }
+
+    .status-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .status-list strong { color: var(--ink); }
+
+    section { padding: clamp(4rem, 8vw, 7rem) 0; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      margin: 0.8rem 0 0;
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .section-head p {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .table-shell {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+    }
+
+    th,
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font: 700 0.73rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    td:first-child {
+      color: var(--signal);
+      font: 800 1.4rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .pending { color: #7f8893; }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--line);
+    }
+
+    .metric {
+      min-height: 185px;
+      padding: 1.4rem;
+      background: var(--panel);
+    }
+
+    .weight {
+      display: inline-block;
+      margin-bottom: 2.5rem;
+      color: var(--signal);
+      font: 800 1.55rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .metric h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.08rem;
+    }
+
+    .metric p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .rules {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .rule {
+      border-top: 2px solid var(--cool);
+      background: var(--panel);
+      padding: 1.4rem;
+    }
+
+    .rule h3 { margin: 0.8rem 0 0.5rem; }
+    .rule p { margin: 0; color: var(--muted); }
+
+    .disclaimer {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-2);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    .disclaimer p { max-width: 900px; color: #c2c7cc; }
+
+    footer {
+      padding: 2rem 0 3rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .section-head { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .metric-grid,
+      .rules { grid-template-columns: 1fr 1fr; }
+      .nav-links a:not(:last-child) { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      h1 { font-size: clamp(3.2rem, 18vw, 5rem); }
+      .metric-grid,
+      .rules { grid-template-columns: 1fr; }
+      .actions { flex-direction: column; }
+      .button { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="SSS Space 5 home">
+        <span class="mark" aria-hidden="true">S5</span>
+        <span>SSS Space 5</span>
+      </a>
+      <div class="nav-links">
+        <a href="#ranking">Ranking</a>
+        <a href="#method">Method</a>
+        <a href="https://github.com/nicholasastjohn/sss-space-5">GitHub ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Weekly space-economy intelligence</div>
+        <h1>Signal over space hype.</h1>
+        <p class="hero-copy">A weekly top-five public space-company watchlist built from transparent metrics, current public evidence, and a versioned research record.</p>
+        <div class="actions">
+          <a class="button primary" href="#ranking">See this week’s status</a>
+          <a class="button" href="../methodology.md">Read the methodology</a>
+        </div>
+      </div>
+
+      <aside class="status-card" aria-label="Current release status">
+        <div class="label">Release 0.1 · 2026-09-01</div>
+        <h2>Framework live.</h2>
+        <p>The first ranking stays empty until the source-backed research pass is complete.</p>
+        <ul class="status-list">
+          <li><span>Methodology</span><strong>Published</strong></li>
+          <li><span>Data schema</span><strong>Published</strong></li>
+          <li><span>Top five</span><strong>Pending</strong></li>
+        </ul>
+      </aside>
+    </div>
+
+    <section id="ranking">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="label">Week of 2026-09-01</div>
+            <h2>The Space 5</h2>
+          </div>
+          <p>No company has been ranked yet. Shipping the framework first prevents a placeholder opinion from masquerading as evidence-backed research.</p>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Company</th>
+                <th>Ticker</th>
+                <th>SSS Score</th>
+                <th>Thesis</th>
+                <th>Main risk</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>01</td><td class="pending">Research pending</td><td>—</td><td>—</td><td class="pending">Source review required</td><td class="pending">Source review required</td></tr>
+              <tr><td>02</td><td class="pending">Research pending</td><td>—</td><td>—</td><td class="pending">Source review required</td><td class="pending">Source review required</td></tr>
+              <tr><td>03</td><td class="pending">Research pending</td><td>—</td><td>—</td><td class="pending">Source review required</td><td class="pending">Source review required</td></tr>
+              <tr><td>04</td><td class="pending">Research pending</td><td>—</td><td>—</td><td class="pending">Source review required</td><td class="pending">Source review required</td></tr>
+              <tr><td>05</td><td class="pending">Research pending</td><td>—</td><td>—</td><td class="pending">Source review required</td><td class="pending">Source review required</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="label">0–100 composite</div>
+            <h2>Six visible weights.</h2>
+          </div>
+          <p>The model rewards economically meaningful space exposure, demonstrated demand, hard-to-copy capability, execution, staying power, and strategic leverage.</p>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric"><span class="weight">20%</span><h3>Space relevance</h3><p>How directly enterprise value depends on the space economy.</p></article>
+          <article class="metric"><span class="weight">20%</span><h3>Revenue / backlog</h3><p>The quality, credibility, and conversion of demonstrated demand.</p></article>
+          <article class="metric"><span class="weight">20%</span><h3>Technical moat</h3><p>Flight heritage, infrastructure, data, qualification barriers, and integration depth.</p></article>
+          <article class="metric"><span class="weight">15%</span><h3>Growth trajectory</h3><p>Revenue, deployments, customers, capacity, and execution direction.</p></article>
+          <article class="metric"><span class="weight">15%</span><h3>Financial durability</h3><p>Liquidity, cash use, debt, capital intensity, margins, and dilution risk.</p></article>
+          <article class="metric"><span class="weight">10%</span><h3>Strategic importance</h3><p>Relevance to resilient infrastructure and hard space-economy bottlenecks.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="label">Research standard</div>
+            <h2>Three non-negotiables.</h2>
+          </div>
+          <p>The list is useful only if a reader can trace what changed, inspect the evidence, and see where judgment or uncertainty entered the score.</p>
+        </div>
+
+        <div class="rules">
+          <article class="rule"><div class="label">01 · Public</div><h3>Primary evidence first</h3><p>Filings, official financial materials, government records, and mission documentation outrank narrative coverage.</p></article>
+          <article class="rule"><div class="label">02 · Dated</div><h3>Every week is preserved</h3><p>New evidence creates a new ranking. Historical records are never silently rewritten.</p></article>
+          <article class="rule"><div class="label">03 · Honest</div><h3>Missing means missing</h3><p>Material source gaps make a company ineligible; they are not filled with confident-sounding guesses.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap disclaimer">
+        <div class="label">Important boundary</div>
+        <h2>Research, not a trading signal.</h2>
+        <p>SSS Space 5 does not model valuation or expected return and makes no recommendation to buy, sell, or hold any security. It uses lawful public sources only—never employer, customer, classified, controlled, proprietary, procurement-sensitive, export-controlled, or material nonpublic information.</p>
+        <a class="button" href="../disclaimer.md">Read the full disclaimer</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>St. John Space Solutions · SSS Space 5</span>
+      <span>Transparent metrics · Weekly record · Public sources</span>
+    </div>
+  </footer>
+</body>
+</html>
